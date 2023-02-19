@@ -26,7 +26,7 @@
     $result = mysqli_query($conn, $sql);
     while ($row = mysqli_fetch_assoc($result)) {
         $catname = $row['thread_title'];
-        $catdesc = $row['thread_thread_desc'];
+        $catdesc = $row['thread_desc'];
         // $catname = $row['category_name'];
     }
     ?>
@@ -50,11 +50,14 @@
 
     <div class="container" id="ques">
         <h1 class="py-2">Discussion</h1>
-        <!-- <?php
+      <?php
         $id = $_GET['threadid'];
         $sql = "SELECT * FROM `threads` WHERE thread_cat_id=$id";
         $result = mysqli_query($conn, $sql);
+        $noResult = true;
         while ($row = mysqli_fetch_assoc($result)) {
+        $noResult = false;
+
             $title = $row['thread_title'];
             $desc = $row['thread_desc'];
             $id = $row['thread_id'];
@@ -70,7 +73,16 @@
         </div>
         <hr>';
     }
-    ?> -->
+    if ($noResult) {
+        echo '<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <p class="display-4">No Threads Found</p>
+      <p class="lead"><b>Be the first person to ask a question</b></p>
+    </div>
+  </div>';
+    }
+    ?>
+
        
     </div>
     <?php include 'partials/_footer.php'; ?>
