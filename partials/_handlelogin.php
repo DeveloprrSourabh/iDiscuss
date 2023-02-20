@@ -13,6 +13,8 @@ if($numRows == 1){
 session_start();
 $_SESSION['loggedin'] = true;
 $_SESSION['useremail'] = $email;
+$_SESSION['sno'] = $row['sno'];
+
 echo "logged In".$email;
     }
         header("location: /forum/index.php");

@@ -37,7 +37,8 @@
         //Insert thread into db
         $th_title = $_POST['title'];
         $th_desc = $_POST['desc'];
-        $sql = "INSERT INTO `threads` (`thread_title`, `thread_desc`, `thread_cat_id`, `thread_user_id`, `dt`) VALUES ('$th_title', '$th_desc', '$id', '0', current_timestamp());";
+        $sno =$_POST["sno"];
+        $sql = "INSERT INTO `threads` (`thread_title`, `thread_desc`, `thread_cat_id`, `thread_user_id`, `dt`) VALUES ('$th_title', '$th_desc', '$id', '$sno', current_timestamp());";
         $result = mysqli_query($conn, $sql);
         $showAlert = true;
         if ($showAlert) {
@@ -83,6 +84,7 @@
             placeholder="Enter email">
         <small id="emailHelp" class="form-text text-muted">Keep your title short and crisp as possible</small>
     </div>
+    <input type="hidden" name="sno" value="'. $_SESSION["sno"].' ">
     <div class="form-group">
         <label for="exampleFormControlTextarea1">Eleborate your concern</label>
         <textarea class="form-control" id="desc" name="desc" rows="3"></textarea>
@@ -112,6 +114,12 @@
             $desc = $row['thread_desc'];
             $id = $row['thread_id'];
             $thread_time = $row['dt'];
+            $thread_user_id = $row['thread_user_id'];
+
+$sql2 = "SELECT user_email from `users` WHERE sno = '$thread_user_id'";
+$result2 = mysqli_query($conn, $sql2);
+$row2 = mysqli_fetch_assoc($result2);
+$user = $row2['user_email'];
 
 
             echo '<div class="media my-3">
@@ -119,7 +127,7 @@
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhAsS7pPgOMBFZTSBDiUVQ4DAYoAD0M-6q7BuPr6z0gKItbESyEMQmUm5qmWiU9SR1kCc&usqp=CAU"
                 alt="Generic placeholder image">
             <div class="media-body">
-            <p class="font-weight-bold my-0">Anonymous User at ' . $thread_time . '</p>
+            <p class="font-weight-bold my-0"> '.$user. ' at ' .$thread_time . '</p>
                 <h5 class="mt-0"><a href="thread.php?threadid=' . $id . '">' . $title . '</a></h5>
                 ' . $desc . '
             </div>
