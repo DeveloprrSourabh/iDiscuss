@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 echo '
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
@@ -28,18 +30,25 @@ Categories          </a>
           <a class="nav-link" href="contact.php" >Contact</a>
         </li>
       </ul>
-      <div class="row mx-2">
-        <form class=" col d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-success" type="submit">Search</button>
-          </form>
-        <div class="col my-2 d-flex">
+      <div class="row mx-2">';
 
-      <button class="ml-2 btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
-      <button class="mx-2 btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#signupModal">Signup</button>
-    </div>
+      if (isset($_SESSION['loggedin']) && isset($_SESSION['loggedin']) == true) {
+ 
+        echo '<form class=" col d-flex align-items-center">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-success" type="submit">Search</button>
+    <p class=" text-light mx-3 my-0"> welcome'.$_SESSION['useremail'] .'</p>
+    <a href="partials/_logout.php" class="ml-2 btn btn-outline-danger">Logout</a>
+    </form>';
+       } else{
+        echo '  <div class="col my-2 d-flex">
+        <button class="ml-2 btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+        <button class="mx-2 btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#signupModal">Signup</button>
+     </div>';
+       }
+      
 
-      </div>
+     echo  '</div>
      
     </div>
   </div>
@@ -47,5 +56,12 @@ Categories          </a>
 ';
 include 'partials/_loginModal.php';
 include 'partials/_signupModal.php';
+if (isset($_GET['signupsuccess']) && $_GET['signupsuccess']== "true") {
+  echo '<div class=" my-0 alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Success!</strong> You can now login.
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>';
+}
+
 
 ?>

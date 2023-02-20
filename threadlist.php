@@ -100,12 +100,15 @@
             $title = $row['thread_title'];
             $desc = $row['thread_desc'];
             $id = $row['thread_id'];
+            $thread_time = $row['dt'];
+
 
             echo '<div class="media my-3">
             <img width="34px" class="mr-3"
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhAsS7pPgOMBFZTSBDiUVQ4DAYoAD0M-6q7BuPr6z0gKItbESyEMQmUm5qmWiU9SR1kCc&usqp=CAU"
                 alt="Generic placeholder image">
             <div class="media-body">
+            <p class="font-weight-bold my-0">Anonymous User at '. $thread_time. '</p>
                 <h5 class="mt-0"><a href="thread.php?threadid=' . $id . '">' . $title . '</a></h5>
                 ' . $desc . '
             </div>
@@ -127,6 +130,9 @@
 
     </div>
     <?php include 'partials/_footer.php'; ?>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
