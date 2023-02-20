@@ -27,7 +27,11 @@
     while ($row = mysqli_fetch_assoc($result)) {
         $catname = $row['thread_title'];
         $catdesc = $row['thread_desc'];
-        // $catname = $row['category_name'];
+        $thread_user_id = $row['thread_user_id'];
+        $sql2 = "SELECT user_email FROM `users` WHERE sno = '$thread_user_id'";
+        $result2 = mysqli_query($conn, $sql2);
+        $row2 = mysqli_fetch_assoc($result2);
+        $posted_by = $row2['user_email'];
     }
     ?>
     <?php
@@ -66,7 +70,7 @@
             <hr class="my-4">
             <p>This is a perr to perr forum for sharing knowledge with each other</p>
             <p class="text-left">
-                <b> Posted by: Sourabh</b>
+            Posted by: <em> <b><?php echo $posted_by; ?></b></em>
             </p>
         </div>
     </div>
@@ -80,7 +84,7 @@
         <div class="form-group">
             <label for="exampleFormControlTextarea1">Type your comment</label>
             <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
-            <input type="hidden" name="sno" value="'.$_SESSION["sno"].'>
+            <input type="hidden" name="sno" value="'.$_SESSION['sno'].'>
         </div>
         
         <button class="btn btn-primary"  type="submit"></button>

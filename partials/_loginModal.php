@@ -9,9 +9,8 @@
             <form autocomplete="off" action="/forum/partials/_handlelogin.php" method= "post">
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="loginEmail" class="form-label">Email address</label>
-                        <input autocomplete="off" type="email" class="form-control" id="loginEmail" name="loginEmail" aria-describedby="emailHelp">
-                        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                        <label for="loginEmail" class="form-label">Username</label>
+                        <input autocomplete="off" type="text" class="form-control" id="loginEmail" name="loginEmail" aria-describedby="emailHelp">
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Password</label>

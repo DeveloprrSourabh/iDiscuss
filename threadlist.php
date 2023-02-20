@@ -105,7 +105,7 @@
         <h1 class="py-2">Browse Questions</h1>
         <?php
         $id = $_GET['catid'];
-        $sql = "SELECT * FROM `threads` WHERE thread_cat_id=$id";
+        $sql = "SELECT * FROM `threads` WHERE thread_cat_id='$id'";
         $result = mysqli_query($conn, $sql);
         $noResult = true;
         while ($row = mysqli_fetch_assoc($result)) {
