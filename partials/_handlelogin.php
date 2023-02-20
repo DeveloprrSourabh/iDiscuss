@@ -18,6 +18,7 @@ echo "logged In".$email;
         header("location: /forum/index.php");
     
 }
+header("location: /forum/index.php");
 
 }
 ?>

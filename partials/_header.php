@@ -37,7 +37,7 @@ Categories          </a>
         echo '<form class=" col d-flex align-items-center">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-success" type="submit">Search</button>
-    <p class=" text-light mx-3 my-0"> welcome'.$_SESSION['useremail'] .'</p>
+    <p class=" text-light mx-3 my-0"> welcome ' .$_SESSION['useremail'] . '</p>
     <a href="partials/_logout.php" class="ml-2 btn btn-outline-danger">Logout</a>
     </form>';
        } else{
