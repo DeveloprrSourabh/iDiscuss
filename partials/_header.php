@@ -16,34 +16,46 @@ echo '
         <li class="nav-item">
           <a class="nav-link" href="about.php">About</a>
         </li>
+      
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-Categories          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown"></div>
-        </li>
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Top Categories
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">'; 
+        $sql = "SELECT category_name, category_id FROM `categories` LIMIT 3";
+        $result = mysqli_query($conn, $sql);
+        $noResutl = true;
+        while ($row = mysqli_fetch_assoc($result)) {
+       echo '<a class="dropdown-item" href="threadlist.php?catid='.$row['category_id'].'">'.$row['category_name'].'</a>';
+        }
+        
+       
+        echo '</div>
+      </li>
+
         <li class="nav-item">
           <a class="nav-link" href="contact.php" >Contact</a>
         </li>
       </ul>
       <div class="row mx-2">';
 
-      if (isset($_SESSION['loggedin']) && isset($_SESSION['loggedin']) == true) {
- 
-        echo '<form class=" col d-flex align-items-center">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+if (isset($_SESSION['loggedin']) && isset($_SESSION['loggedin']) == true) {
+
+  echo '<form class=" col d-flex align-items-center" action="search.php" method="get">
+        <input class="form-control me-2" name="search" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-success" type="submit">Search</button>
-    <p class=" text-light mx-3 my-0"> welcome ' .$_SESSION['useremail'] . '</p>
+    <p class=" text-light mx-3 my-0"> welcome ' . $_SESSION['useremail'] . '</p>
     <a href="partials/_logout.php" class="ml-2 btn btn-outline-danger">Logout</a>
     </form>';
-       } else{
-        echo '  <div class="col my-2 d-flex">
+} else {
+  echo '  <div class="col my-2 d-flex">
         <button class="ml-2 btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
         <button class="mx-2 btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#signupModal">Signup</button>
      </div>';
-       }
-      
+}
 
-     echo  '</div>
+
+echo '</div>
      
     </div>
   </div>
@@ -51,7 +63,7 @@ Categories          </a>
 ';
 include 'partials/_loginModal.php';
 include 'partials/_signupModal.php';
-if (isset($_GET['signupsuccess']) && $_GET['signupsuccess']== "true") {
+if (isset($_GET['signupsuccess']) && $_GET['signupsuccess'] == "true") {
   echo '<div class=" my-0 alert alert-success alert-dismissible fade show" role="alert">
   <strong>Success!</strong> You can now login.
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>

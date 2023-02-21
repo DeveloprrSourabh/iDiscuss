@@ -5,21 +5,22 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
-    #ques {
-        min-height: 433px;
-    }
+        #ques {
+            min-height: 433px;
+        }
     </style>
     <title>iDiscuss - Coding Forums</title>
 </head>
 
 <body>
-    <?php include 'partials/_header.php'; ?>
     <?php include 'partials/_dbconnect.php'; ?>
+    <?php include 'partials/_header.php'; ?>
     <?php
     $id = $_GET['threadid'];
     $sql = "SELECT * FROM `threads` WHERE thread_id='$id'";
@@ -40,7 +41,7 @@
     if ($method == 'POST') {
         //Insert into comment db
         $comment = $_POST['comment'];
-        $sno =$_POST["sno"];
+        $sno = $_POST["sno"];
         $sql = "INSERT INTO `comments` (`comment_content`, `thread_id`, `comment_by`, `comment_time`) VALUES ('$comment', '$id', '$sno', current_timestamp())";
         $result = mysqli_query($conn, $sql);
         $showAlert = true;
@@ -70,11 +71,13 @@
             <hr class="my-4">
             <p>This is a perr to perr forum for sharing knowledge with each other</p>
             <p class="text-left">
-            Posted by: <em> <b><?php echo $posted_by; ?></b></em>
+                Posted by: <em> <b>
+                        <?php echo $posted_by; ?>
+                    </b></em>
             </p>
         </div>
     </div>
-    
+
     <?php
     if (isset($_SESSION['loggedin']) && isset($_SESSION['loggedin']) == true) {
         echo '
@@ -84,7 +87,7 @@
         <div class="form-group">
             <label for="exampleFormControlTextarea1">Type your comment</label>
             <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
-            <input type="hidden" name="sno" value="'.$_SESSION['sno'].'>
+            <input type="hidden" name="sno" value="' . $_SESSION['sno'] . '>
         </div>
         
         <button class="btn btn-primary"  type="submit"></button>
@@ -120,7 +123,7 @@
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhAsS7pPgOMBFZTSBDiUVQ4DAYoAD0M-6q7BuPr6z0gKItbESyEMQmUm5qmWiU9SR1kCc&usqp=CAU"
                 alt="Generic placeholder image">
             <div class="media-body">
-            <p class="font-weight-bold my-0"> '.$row2['user_email'].' at ' . $comment_time . ' </p>
+            <p class="font-weight-bold my-0"> ' . $row2['user_email'] . ' at ' . $comment_time . ' </p>
                 ' . $content . '
             </div>
         </div>
@@ -139,11 +142,18 @@
 
     </div>
     <?php include 'partials/_footer.php'; ?>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+        </script>
 
-<!-- Option 2: Separate Popper and Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+        </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+        </script>
 
 </body>
+
 </html>
